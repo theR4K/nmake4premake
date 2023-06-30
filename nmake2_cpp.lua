@@ -658,14 +658,15 @@
 			targets = targets .. ' $(RESOURCES)'
 		end
 
-		p.w('$(TARGET): $(TARGETDIR) %s', targets)
+		p.push('$(TARGET): $(TARGETDIR) %s', targets)
 		p.w('$(PRELINKCMDS)')
 		p.w('@echo Linking %s', cfg.project.name)
-		p.push('$(SILENT) $(LINK) @<<')
-		p.w('$(LINKCMD)')
-		p.pop('<<')
+		p.w('$(SILENT) $(LINK) @<<')
+		-- due specification << must be at position 0
+		p.pop('$(LINKCMD)')
+		p.push('<<')
 		p.w('$(POSTBUILDCMDS)')
-		p.w('')
+		p.pop('')
 	end
 
 
