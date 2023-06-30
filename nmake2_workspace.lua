@@ -87,25 +87,25 @@
 
 	function nmake2.helprule(wks)
 		p.push('HELP:')
-		p.w('-@echo "Usage: nmake.exe /f build.mak [GFG=name] [target]"')
-		p.w('-@echo ""')
-		p.w('-@echo "CONFIGURATIONS:"')
+		p.w('-@echo Usage: nmake.exe /f build.mak [GFG=name] [target]')
+		p.w('-@echo ')
+		p.w('-@echo CONFIGURATIONS:')
 
 		for cfg in p.workspace.eachconfig(wks) do
-			p.x('-@echo "  %s"', cfg.shortname)
+			p.x('-@echo   %s', cfg.shortname)
 		end
 
-		p.w('-@echo ""')
+		p.w('-@echo ')
 
-		p.w('-@echo "TARGETS:"')
-		p.w('-@echo "   all (default)"')
-		p.w('-@echo "   clean"')
+		p.w('-@echo TARGETS:')
+		p.w('-@echo    all (default)')
+		p.w('-@echo    clean')
 
 		for prj in p.workspace.eachproject(wks) do
-			p.w('-@echo "   %s"', prj.name)
+			p.w('-@echo    %s', prj.name)
 		end
 
-		p.w('-@echo ""')
+		p.w('-@echo ')
 		p.pop('')
 	end
 

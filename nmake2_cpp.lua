@@ -451,7 +451,7 @@
 			percfgflags = percfgflags .. " /machine:" .. cpp.linkMacineName(cfg)
 		end
 		
-		p.w('LINKCMD=$(LINK) $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) %s $(LIBS)', percfgflags)
+		p.w('LINKCMD=$(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) %s $(LIBS)', percfgflags)
 	end
 
 
@@ -658,12 +658,14 @@
 			targets = targets .. ' $(RESOURCES)'
 		end
 
-		p.push('$(TARGET): $(TARGETDIR) %s', targets)
+		p.w('$(TARGET): $(TARGETDIR) %s', targets)
 		p.w('$(PRELINKCMDS)')
 		p.w('@echo Linking %s', cfg.project.name)
-		p.w('$(SILENT) $(LINKCMD)')
+		p.push('$(SILENT) $(LINK) @<<')
+		p.w('$(LINKCMD)')
+		p.pop('<<')
 		p.w('$(POSTBUILDCMDS)')
-		p.pop('')
+		p.w('')
 	end
 
 
